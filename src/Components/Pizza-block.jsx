@@ -1,12 +1,12 @@
 import {useState} from "react";
 
-function PizzaBlock({title}) {
+function PizzaBlock({title, price, imageUrl}) {
     const [count, setCount] = useState(0)
     return (
         <div className="pizza-block">
             <img
                 className="pizza-block__image"
-                src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+                src={imageUrl}
                 alt="Pizza"
             />
             <h4 className="pizza-block__title">{title}</h4>
@@ -23,7 +23,7 @@ function PizzaBlock({title}) {
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от 395 ₽</div>
+                <div className="pizza-block__price">от {price} ₽</div>
                 <button className="button button--outline button--add" onClick={()=> setCount(count + 1) } >
                     <svg
                         width="12"
