@@ -14,6 +14,10 @@ body {
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;
+  @media (max-width: 645px) {
+    width: calc(100vw - 30px);
+    margin-top: 15px;
+  }
 }
 
 .content {
@@ -21,6 +25,9 @@ body {
 
   &__title {
     margin: 35px 0;
+    @media (max-width: 645px) {
+      text-align: center;
+    }
   }
 
   &__items {
@@ -46,6 +53,21 @@ body {
     justify-content: space-between;
 
     @media (max-width: 1290px) {
+      .sort b{
+        display: none;
+      }
+      .categories {
+        width: 100%;
+        overflow: scroll;
+        ul {
+          width: 785px;
+        }
+      }
+    }
+    @media (max-width: 720px) {
+      .categories {
+        margin-top: 20px;
+      }
       flex-direction: column-reverse;
     }
   }
