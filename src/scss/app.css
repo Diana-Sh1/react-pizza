@@ -381,7 +381,7 @@ body {
   }
 }
 .content__items {
-  display: grid;
+  display: block;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 11px;
@@ -412,7 +412,7 @@ body {
   }
   .content__top .categories {
     width: 100%;
-    overflow: scroll;
+    overflow: auto;
   }
   .content__top .categories ul {
     width: 785px;
