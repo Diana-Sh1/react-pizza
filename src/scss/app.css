@@ -381,7 +381,7 @@ body {
   }
 }
 .content__items {
-  display: block;
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 11px;
@@ -443,6 +443,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.cart__items {
+  display: block;
 }
 .cart .content__title {
   display: flex;
