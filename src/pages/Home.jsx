@@ -8,6 +8,9 @@ import {useEffect, useState} from "react";
 function Home() {
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
+    const [categoryId, setCategoryId] = useState(0);
+    const [sortType, setSortType] = useState(0);
+
     useEffect(() => {
         fetch('https://64b513c6f3dbab5a95c6a8b7.mockapi.io/items')
             .then(res => res.json())
@@ -20,7 +23,7 @@ function Home() {
     return (
         <>
             <div className="content__top">
-                <Categories/>
+                <Categories value={categoryId}/>
                 <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
