@@ -12,19 +12,20 @@ function Home() {
     const [sortType, setSortType] = useState(0);
 
     useEffect(() => {
-        fetch('https://64b513c6f3dbab5a95c6a8b7.mockapi.io/items')
+        setIsLoading(true);
+        fetch('https://64b513c6f3dbab5a95c6a8b7.mockapi.io/items?category=' + categoryId)
             .then(res => res.json())
             .then((arr) => {
                 setItems(arr);
                 setIsLoading(false);
             })
         window.scrollTo(0,0)
-    }, [])
+    }, [categoryId])
     return (
         <>
             <div className="content__top">
-                <Categories value={categoryId} onClickCategory={(id)=> setCategoryId(id)}/>
-                <Sort/>
+                <Categories value={categoryId} onChangeCategory={(i)=> setCategoryId(i)}/>
+                <Sort value={sortType} onChangeSort={(i)=> setSortType(i)}/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
