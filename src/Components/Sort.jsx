@@ -3,8 +3,12 @@ import {useState} from "react";
 function Sort({value, onChangeSort}) {
     const [open, setOpen] = useState(false);
 
-    const list = ['популярности', 'цене', 'алфавиту'];
-    const sortName = list[value]
+    const list = [
+        {name: 'популярности', sort: 'rating'},
+        {name: 'цене', sort: 'price'},
+        {name: 'алфавиту', sort: 'title'}
+    ];
+    const sortName = list[value].name
     const onClickSortItem = (i)=> {
         onChangeSort(i)
         setOpen(false)
@@ -32,7 +36,7 @@ function Sort({value, onChangeSort}) {
                 <div className="sort__popup">
                     <ul>
                         {list.map((name, i)=> <li onClick={()=> onClickSortItem(i)}  key={name}
-                                                   className={value === i? 'active': ''}>{name}
+                                                   className={value === i? 'active': ''}>{list.name}
                         </li>)}
                     </ul>
                 </div>
