@@ -259,6 +259,25 @@ a {
   border-bottom: 1px dashed #fe5f1e;
   cursor: pointer;
 }
+.sort__label button {
+  text-align: center;
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  border: 1px solid #fe5f1e;
+  border-radius: 30px;
+  margin-right: 5px;
+  cursor: pointer;
+  background-color: white;
+  color: #fe5f1e;
+}
+.sort__label button:hover {
+  background-color: #fe5f1e;
+  color: white;
+}
+.sort__buttons {
+  margin-left: 10px;
+}
 .sort__popup {
   position: absolute;
   right: 0;
