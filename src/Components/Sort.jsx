@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-function Sort({value, onChangeSort, setOrderType, orderType}) {
+function Sort({value, onChangeSort, setOrderType}) {
 
     const [open, setOpen] = useState(false);
 
