@@ -5,7 +5,7 @@ import PizzaBlock from "../Components/PizzaBlock/PizzaBlock";
 import {useEffect, useState} from "react";
 
 
-function Home() {
+function Home({searchValue}) {
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const [categoryId, setCategoryId] = useState(0);
@@ -26,6 +26,10 @@ function Home() {
             })
         window.scrollTo(0,0)
     }, [categoryId, sortType, orderType])
+
+    const pizzas = items.map(obj => <PizzaBlock key={obj.id} {...obj}/>)
+    const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
+
     return (
         <>
             <div className="content__top">
@@ -35,8 +39,9 @@ function Home() {
             <h2 className="content__title">Все пиццы</h2>
 
             <div className="content__items">
-                {isLoading ? [...new Array(6)].map((_, index) => <Skeleton key={index}/>) : items.map(obj => <PizzaBlock
-                    key={obj.id} {...obj}/>)
+                {isLoading
+                    ? skeletons
+                    : pizzas
                 }
             </div>
         </>

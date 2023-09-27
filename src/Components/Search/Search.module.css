@@ -25,4 +25,17 @@
   top: 12px;
 }
 
+.clearIcon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  opacity: 0.2;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.clearIcon:hover {
+  opacity: 0.8;
+}
+
 /*# sourceMappingURL=Search.module.css.map */
