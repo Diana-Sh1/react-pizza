@@ -8,7 +8,7 @@ function Sort({value, onChangeSort, setOrderType}) {
         {name: 'популярности', sortProperty: 'rating'},
         {name: 'цене', sortProperty: 'price'},
         {name: 'алфавиту', sortProperty: 'title'}
-    ]
+    ];
 
     const onClickSortItem = (i)=> {
         onChangeSort(i)
