@@ -12,6 +12,7 @@ function Home({searchValue}) {
     const [isLoading, setIsLoading] = useState(true)
     const [categoryId, setCategoryId] = useState(0);
     const [orderType, setOrderType] = useState('asc');
+    const [currentPage, setCurrentPage] = useState(1);
     const [sortType, setSortType] = useState({
         name: 'популярности',
         sortProperty: 'rating'
@@ -21,17 +22,17 @@ function Home({searchValue}) {
         setIsLoading(true);
         const search = searchValue ? `&search=${searchValue}` : '';
 
-        fetch(`https://64b513c6f3dbab5a95c6a8b7.mockapi.io/items?${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sortType.sortProperty}&order=${orderType}${search}`)
+        fetch(`https://64b513c6f3dbab5a95c6a8b7.mockapi.io/items?page=${currentPage}&limit=4&${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sortType.sortProperty}&order=${orderType}${search}`)
             .then(res => res.json())
             .then((arr) => {
                 setItems(arr);
                 setIsLoading(false);
             })
         window.scrollTo(0, 0)
-    }, [categoryId, sortType, orderType, searchValue])
+    }, [categoryId, sortType, orderType, searchValue, currentPage])
 
     const pizzas = items.map(obj => <PizzaBlock key={obj.id} {...obj}/>)
-    const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
+    const skeletons = [...new Array(4)].map((_, index) => <Skeleton key={index}/>)
 
     return (
         <>
@@ -47,7 +48,7 @@ function Home({searchValue}) {
                     : pizzas
                 }
             </div>
-            <Pagination/>
+            <Pagination onChangePage={number=> setCurrentPage(number)}/>
         </>
     )
 }
