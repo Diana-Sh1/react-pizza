@@ -6,9 +6,10 @@ import {Route, Routes} from "react-router-dom";
 import Cart from "./pages/Cart";
 import {createContext, useState} from "react";
 
-const SearchContext = createContext('')
+export const SearchContext = createContext();
 
 function App() {
+
     const [searchValue, setSearchValue] = useState('');
     return (
         <div className="wrapper">
@@ -17,7 +18,7 @@ function App() {
                 <div className="content">
                     <div className="container">
                         <Routes>
-                            <Route path="/" element={<Home searchValue={searchValue}/>} />
+                            <Route path="/" element={<Home/>} />
                             <Route path="/cart" element={<Cart/>} />
                             <Route path="*" element={<NotFound/>} />
                         </Routes>
