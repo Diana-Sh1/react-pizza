@@ -5,6 +5,8 @@ import NotFound from "./pages/NotFound";
 import {Route, Routes} from "react-router-dom";
 import Cart from "./pages/Cart";
 import {createContext, useState} from "react";
+import { useSelector, useDispatch } from 'react-redux'
+
 
 export const SearchContext = createContext();
 
