@@ -12,35 +12,33 @@ import {setCategoryId} from "../redux/slices/filterSlice";
 
 function Home() {
     const dispatch = useDispatch();
-    const categoryId = useSelector(state => state.filter.categoryId)
+    const { categoryId, sort, order } = useSelector(state => state.filter)
+    // const sortType = useSelector(state => state.filter.sort.sortProperty)
+    // const orderType = useSelector(state => state.filter.order)
+
     const {searchValue} = useContext(SearchContext)
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
-    // const [categoryId, setCategoryId] = useState(0);
-    const [orderType, setOrderType] = useState('asc');
+
+    // const [orderType, setOrderType] = useState('asc');
     const [currentPage, setCurrentPage] = useState(1);
-    const [sortType, setSortType] = useState({
-        name: 'популярности',
-        sortProperty: 'rating'
-    });
+
     const onChangeCategory = (id) => {
-        console.log(id);
         dispatch(setCategoryId(id))
     }
-    console.log(categoryId);
 
     useEffect(() => {
         setIsLoading(true);
         const search = searchValue ? `&search=${searchValue}` : '';
 
-        fetch(`https://64b513c6f3dbab5a95c6a8b7.mockapi.io/items?page=${currentPage}&limit=4&${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sortType.sortProperty}&order=${orderType}${search}`)
+        fetch(`https://64b513c6f3dbab5a95c6a8b7.mockapi.io/items?page=${currentPage}&limit=4&${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sort.sortProperty}&order=${order}${search}`)
             .then(res => res.json())
             .then((arr) => {
                 setItems(arr);
                 setIsLoading(false);
             })
         window.scrollTo(0, 0)
-    }, [categoryId, sortType, orderType, searchValue, currentPage])
+    }, [categoryId, sort, order, searchValue, currentPage])
 
     const pizzas = items.map(obj => <PizzaBlock key={obj.id} {...obj}/>)
     const skeletons = [...new Array(4)].map((_, index) => <Skeleton key={index}/>)
@@ -49,7 +47,7 @@ function Home() {
         <>
             <div className="content__top">
                 <Categories value={categoryId} onChangeCategory={onChangeCategory}/>
-                <Sort value={sortType} onChangeSort={(i) => setSortType(i)} setOrderType={setOrderType} orderType/>
+                <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
 
