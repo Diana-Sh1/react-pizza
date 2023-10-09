@@ -1,6 +1,6 @@
 import styles from "./Search.module.scss"
 import style from "./Search.module.scss";
-import {useContext, useRef, useState} from "react";
+import {useCallback, useContext, useRef, useState} from "react";
 import {SearchContext} from "../../App";
 import debounce from 'lodash.debounce'
 
@@ -10,14 +10,24 @@ const testDebounce = debounce(()=>{
 
 const Search = () => {
     const [value, setValue] = useState('');
-    const {searchValue, setSearchValue} = useContext(SearchContext)
+    const { setSearchValue} = useContext(SearchContext)
     const inputRef = useRef()
     const onClickClear = ()=> {
         setSearchValue('');
+        setValue('');
         inputRef.current.focus()
     }
+
+    const updateSearchValue = useCallback(
+        debounce(str => {
+            console.log(str);
+            setSearchValue(str);
+        }, 300),
+        []
+    );
     const onChangeInput = e => {
         setValue(e.target.value)
+        updateSearchValue(e.target.value)
     }
     return (
        <div className={styles.root}>
