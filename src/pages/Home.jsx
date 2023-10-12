@@ -62,13 +62,16 @@ function Home() {
     }, [categoryId, sort, order, searchValue, currentPage])
 
     useEffect(() => {
-        const queryString = qs.stringify({
-            sortProperty: sort.sortProperty,
-            categoryId,
-            order,
-            currentPage
-        })
-        navigate(`?${queryString}`)
+       if (isMounted.current) {
+           const queryString = qs.stringify({
+               sortProperty: sort.sortProperty,
+               categoryId,
+               order,
+               currentPage
+           })
+           navigate(`?${queryString}`)
+       }
+       isMounted.current = true
     }, [categoryId, sort, order, currentPage])
 
 
