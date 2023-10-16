@@ -12,7 +12,6 @@ import qs from 'qs';
 import {useNavigate} from "react-router-dom";
 
 
-
 function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -42,7 +41,22 @@ function Home() {
             })
     }
 
-    useEffect(()=>{
+    //Если изменили параметры и был первый рендер-
+    useEffect(() => {
+        if (isMounted.current) {
+            const queryString = qs.stringify({
+                sortProperty: sort.sortProperty,
+                categoryId,
+                order,
+                currentPage
+            })
+            navigate(`?${queryString}`)
+        }
+        isMounted.current = true
+    }, [categoryId, sort, order, currentPage])
+
+    //Если был первый рендер, то проверяем URl-параметры и сохраняем в редаксе
+    useEffect(() => {
         if (window.location.search) {
             const params = qs.parse(window.location.search.substring(1))
             const sort = sortList.find(obj => obj.sortProperty === params.sortProperty)
@@ -51,28 +65,15 @@ function Home() {
             )
             isSearch.current = true;
         }
-    },[])
+    }, [])
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        if(!isSearch.current) {
+        if (!isSearch.current) {
             fetchPizzas();
         }
         isSearch.current = false;
     }, [categoryId, sort, order, searchValue, currentPage])
-
-    useEffect(() => {
-       if (isMounted.current) {
-           const queryString = qs.stringify({
-               sortProperty: sort.sortProperty,
-               categoryId,
-               order,
-               currentPage
-           })
-           navigate(`?${queryString}`)
-       }
-       isMounted.current = true
-    }, [categoryId, sort, order, currentPage])
 
 
     const pizzas = items.map(obj => <PizzaBlock key={obj.id} {...obj}/>)
