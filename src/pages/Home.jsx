@@ -67,6 +67,7 @@ function Home() {
         }
     }, [])
 
+    //Если был первый рендер, то запрашиваем пиццы
     useEffect(() => {
         window.scrollTo(0, 0)
         if (!isSearch.current) {
