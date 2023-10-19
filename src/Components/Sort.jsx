@@ -26,7 +26,6 @@ function Sort() {
     useEffect(() => {
         const handleClickOutside = e => {
             if (!e.composedPath().includes(sortRef.current)) {
-                console.log('был клик на сорт')
                 setOpen(false)
             }
         }
