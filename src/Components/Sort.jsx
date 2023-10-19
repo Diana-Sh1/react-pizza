@@ -24,11 +24,15 @@ function Sort() {
         dispatch(setOrder(obj))
     }
     useEffect(() => {
-    document.body.addEventListener('click', e => {
-        if (e.composedPath().includes (sortRef.current)) {
-            console.log('был клик на сорт')
+        const handleClickOutside = e => {
+            if (!e.composedPath().includes (sortRef.current)) {
+                console.log('был клик на сорт')
+                setOpen(false)
+            }
         }
-    })
+    document.body.addEventListener('click', handleClickOutside)
+
+
     }, [])
 
     return (
