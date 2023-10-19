@@ -25,13 +25,14 @@ function Sort() {
     }
     useEffect(() => {
         const handleClickOutside = e => {
-            if (!e.composedPath().includes (sortRef.current)) {
+            if (!e.composedPath().includes(sortRef.current)) {
                 console.log('был клик на сорт')
                 setOpen(false)
             }
         }
-    document.body.addEventListener('click', handleClickOutside)
+        document.body.addEventListener('click', handleClickOutside)
 
+        return () => document.body.removeEventListener('click', handleClickOutside)
 
     }, [])
 
